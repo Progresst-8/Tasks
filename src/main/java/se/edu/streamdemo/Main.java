@@ -37,19 +37,40 @@ public class Main {
         }
         return count;
     }
+    private static int countDeadlinesWithStreams(ArrayList<Task> tasks) {
+        int count = (int) tasks.stream()
+                .filter( (t) -> t instanceof Deadline ) // lambda functions
+                .count(); //
+        return count;
+    }
 
     public static void printAllData(ArrayList<Task> tasksData) {
+        System.out.println("print all data with iteration _____________________");
         for (Task t : tasksData) {
             System.out.println(t);
         }
     }
+    public static void printDataWithStreams(ArrayList<Task> tasks) {
+        System.out.println("print all data with streams _______________-");
+        tasks.stream()                         // create a stream
+                .forEach(System.out::println); // terminal operator
+    }
 
     public static void printDeadlines(ArrayList<Task> tasksData) {
+        System.out.println("print deadline with iteration __________________");
         for (Task t : tasksData) {
             if (t instanceof Deadline) {
                 System.out.println(t);
             }
         }
     }
+    public static void printDeadlinesWithStreams(ArrayList<Task> tasks) {
+        System.out.println("printing deadline with streams _________________");
+        tasks.stream()                                  //
+                .filter( (t) -> t instanceof Deadline ) // lambda function
+                .forEach(System.out::println);          //
+    }
+
+
 
 }
