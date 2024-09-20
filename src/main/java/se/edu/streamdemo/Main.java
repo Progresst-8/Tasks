@@ -10,6 +10,9 @@ public class Main {
     public static void main(String[] args) {
         System.out.println("Welcome to Task manager (using streams)");
         Datamanager dataManager = new Datamanager("./data/data.txt");
+        // C:\\Users\\User\\CS2113\\ip\\data\\data.txt <<< absolute path
+        // ./data/data.txt <<  relative path
+        // Unix based machines start with /, which indicates root folder
         ArrayList<Task> tasksData = dataManager.loadData();
 
         System.out.println("Printing all data ...");

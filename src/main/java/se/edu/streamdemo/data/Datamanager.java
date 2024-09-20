@@ -46,7 +46,8 @@ public class Datamanager {
             System.out.println("empty file");
             throw new IOException();
         }
-        ArrayList<String> dataItems = (ArrayList) Files.readAllLines(dataFile.toPath(), Charset.defaultCharset());
+        ArrayList<String> dataItems = (ArrayList) Files.readAllLines(
+                dataFile.toPath(), Charset.defaultCharset());
 
         return dataItems;
     }
@@ -57,7 +58,8 @@ public class Datamanager {
             ArrayList<String> dataItems = readFile();
             taskList = parse(dataItems);
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
+            e.printStackTrace(); // bad habit to use stack traces as they aren't informative
         }
         return taskList;
     }
