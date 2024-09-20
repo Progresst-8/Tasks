@@ -17,14 +17,22 @@ public class Main {
 
 //        System.out.println("Printing all data ...");
 //        printAllData(tasksData);
+//        System.out.println("Printing all data ...");
+//        printAllData(tasksData);
 //        printDataWithStreams(tasksData);
 
+        System.out.println("Printing deadlines ...");
+        printDeadlines(tasksData);
+        printDeadlinesUsingStream(tasksData);
 //        System.out.println("Printing deadlines ...");
 //        printDeadlines(tasksData);
 //        printDeadlinesWithStreams(tasksData);
 
         System.out.println("Total deadlines using iteration: " + countDeadlines(tasksData));
         System.out.println("total deadlines using streams: " + countDeadlinesWithStreams(tasksData));
+
+        ArrayList<Task> filteredList = filterTasksByString(tasksData, "11");
+        System.out.println(filteredList);
 
     }
 
@@ -58,11 +66,19 @@ public class Main {
 
     public static void printDeadlines(ArrayList<Task> tasksData) {
         System.out.println("print deadline with iteration __________________");
+        System.out.println("print deadlines using iteration");
         for (Task t : tasksData) {
             if (t instanceof Deadline) {
                 System.out.println(t);
             }
         }
+    }
+    public static void printDeadlinesUsingStream(ArrayList<Task> tasks) {
+        System.out.println("print sorted deadlines using stream");
+        tasks.stream()
+                .filter( t -> t instanceof Deadline )
+                .sorted( (t1, t2) -> t1.getDescription().compareToIgnoreCase(t2.getDescription()) )
+                .forEach(System.out::println);
     }
     public static void printDeadlinesWithStreams(ArrayList<Task> tasks) {
         System.out.println("printing deadline with streams _________________");
@@ -73,4 +89,10 @@ public class Main {
 
 
 
+    public static ArrayList<Task> filterTasksByString(ArrayList<Task> tasks, String filterByString) {
+        ArrayList<Task> filteredList = (ArrayList<Task>) tasks.stream()
+                .filter( t -> t.getDescription().contains(filterByString) )
+                .collect( toList() );
+        return filteredList;
+    }
 }
